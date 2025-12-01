@@ -74,7 +74,8 @@ function AddressAutocomplete({ onPlaceSelected }: { onPlaceSelected: (place: any
 }
 
 function CheckoutForm() {
-  const { cart, clearCart } = useCart();
+
+   const { cart =[], clearCart } =  useCart() ?? {};
   const stripe = useStripe();
   const elements = useElements();
 
@@ -192,7 +193,9 @@ function CheckoutForm() {
             items: cart, // attach actual cart items here
           }),
         });
-        clearCart();
+        if (clearCart) {
+          clearCart();
+        }
         setStatus("Payment successful! 🎉");
       } else {
         setStatus("Payment processing: " + confirmResult.paymentIntent?.status);
