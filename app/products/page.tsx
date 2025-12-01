@@ -65,8 +65,7 @@ export default function Products() {
                 </Button>
 
                 {/* Add to Cart Button */}
-                <Button
-                  variant="success"
+                <Button variant="success"
                   full
                   onClick={() => {
                     addToCart(p);

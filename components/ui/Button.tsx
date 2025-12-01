@@ -8,7 +8,7 @@ type ButtonProps = {
   children: React.ReactNode;
   onClick?: () => void;
   href?: string; // Makes it act like a link
-  variant?: "primary" | "secondary" | "danger" | "outline";
+  variant?: "primary" | "secondary" | "danger" | "outline" | "success";
   className?: string;
   full?: boolean;
 };
@@ -28,6 +28,7 @@ export default function Button({
     secondary: "bg-gray-200 hover:bg-gray-300 text-gray-800",
     danger: "bg-red-600 hover:bg-red-700 text-white",
     outline: "border border-gray-400 text-gray-700 hover:bg-gray-100",
+    success: "bg-green-500 text-white",        
   };
 
   const finalClass = `
