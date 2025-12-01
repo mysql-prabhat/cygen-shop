@@ -7,22 +7,28 @@ type CartItem = {
 };
 
 type CartContextType = {
-  cart: CartItem[];
+  cart: Product[];
   addToCart: (product: CartItem) => void;
-  removeFromCart: (id: number) => void;
+  removeFromCart: (id: string) => void;
   clearCart: () => void;
 };
+interface Product {
+  id: string;
+  name: string;
+  price: number;
+  // any other properties
+}
 
 const CartContext = createContext<CartContextType | null>(null);
 
-export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState([]);
+export const CartProvider = ({ children }: { children: React.ReactNode }) => {
+  const [cart, setCart] = useState<Product[]>([]);
 
   const addToCart = (product:any) => {
     setCart((prev: any) => [...prev, product]);
   };
 
-  const removeFromCart = (id:number) => {
+  const removeFromCart = (id:string) => {
     setCart((prev) => prev.filter((p) => p.id !== id));
   };
   const clearCart = () => {

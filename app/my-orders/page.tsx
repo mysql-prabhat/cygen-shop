@@ -5,7 +5,15 @@ import Link from "next/link";
 import { apiGet } from "../../utils/api";
 
 export default function MyOrders() {
-  const [orders, setOrders] = useState([]);
+  interface Order {
+    id: string;
+    product: string;
+    quantity: number;
+    status: string;
+    amount: number;
+  } 
+
+  const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

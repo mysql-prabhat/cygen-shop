@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function Cart() {
-  const { cart, removeFromCart } = useCart();
+  const { cart, removeFromCart } =  useCart() ?? {};
   const [token, setToken] = useState<string | null>(null); // <-- create state
 
   useEffect(() => {
@@ -17,18 +17,18 @@ export default function Cart() {
     <div className="p-8">
       <h1 className="text-2xl font-bold mb-4">Your Cart</h1>
 
-      {cart.length === 0 && <p>No items in cart</p>}
+      {cart?.length === 0 && <p>No items in cart</p>}
 
       <ul className="space-y-3">
-        {cart.map((item) => (
+        {cart?.map((item) => (
           <li key={item.id} className="border p-4 flex justify-between items-center">
             <div>
-              <h2 className="font-semibold">{item.title}</h2>
+              <h2 className="font-semibold">{item.name}</h2>
               <p>₹{item.price}</p>
             </div>
 
             <button
-              onClick={() => removeFromCart(item.id)}
+              onClick={() => removeFromCart?.(item.id)}
               className="px-5 py-2 bg-red-500 text-white rounded"
             >
               Remove ❌
@@ -37,7 +37,7 @@ export default function Cart() {
         ))}
       </ul>
 
-      {cart.length > 0 && (
+      {cart && (
         <div className="mt-4">
           <Link
             href={token ? "/checkout" : "/login"}  // <-- now works
